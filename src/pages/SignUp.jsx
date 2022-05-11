@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
+import OAuth from "../components/OAuth";
 
 function SignUp() {
   const [showPass, setShowPass] = useState(false);
@@ -22,10 +26,9 @@ function SignUp() {
 
   const onChange = function (e) {
     setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-    console.log(e.target.id);
   };
 
-  const onSubmit = async function (e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     try {
       const auth = getAuth();
@@ -35,12 +38,17 @@ function SignUp() {
         password
       );
       const user = userCredential.user;
+      console.log(user);
       updateProfile(auth.currentUser, {
         displayName: name,
       });
+      const formDataCopy = { ...formData };
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp();
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
       navigate("/");
     } catch (error) {
-      console.log(error);
+      toast.error("Something Went Wrong With Registrarion ");
     }
   };
   return (
@@ -93,6 +101,7 @@ function SignUp() {
               </button>
             </div>
           </form>
+          <OAuth />
           <Link to="/sign-in" className="registerLink">
             Sign In Instead
           </Link>
