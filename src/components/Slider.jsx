@@ -38,7 +38,7 @@ function Slider() {
     fetchListings();
   }, []);
   const formatZeros = (str) => {
-    return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return str?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
   if (loading) {
     return <Spinner />;
@@ -51,7 +51,7 @@ function Slider() {
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
           slidesPerView={1}
           pagination={{ clickable: true }}
-          autoplay={{ delay: 1000 }}
+          autoplay={{ delay: 3000 }}
           navigation
           style={{ height: "400px" }}
         >
