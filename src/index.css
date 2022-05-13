@@ -667,7 +667,7 @@ button {
 .profileEmailActive,
 .profileNameActive {
   all: unset;
-  font-family: "Montserrat", sans-serif
+  font-family: "Montserrat", sans-serif;
   margin: 0.3rem 0;
   font-weight: 600;
   width: 100%;
