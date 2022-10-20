@@ -8,12 +8,12 @@ import { getStorage, connectStorageEmulator } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCjrMdkeBNWBhglmFU3XGQi08hpAE2p7JM",
-  authDomain: "house-marketplace-app-ee9e7.firebaseapp.com",
-  projectId: "house-marketplace-app-ee9e7",
-  storageBucket: "house-marketplace-app-ee9e7.appspot.com",
-  messagingSenderId: "133553370897",
-  appId: "1:133553370897:web:3388f72e2d972d3900beb0",
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
 };
 // Initialize Firebase
 initializeApp(firebaseConfig);
